@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Barcode Scanner
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="scanner" *ngIf="isScanning"></div>
+  
+  <ion-list *ngIf="!isScanning && scannedCodes.length > 0">
+    <ion-item *ngFor="let code of scannedCodes">
+      {{ code }}
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="isScanning ? stopScan() : startScan()">
+    <ion-icon [name]="isScanning ? 'stop' : 'add'"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="scannedCodes.length > 0">
+  <ion-fab-button (click)="saveFile()">
+    <ion-icon name="save"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
